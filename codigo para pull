@@ -1,0 +1,43 @@
+package hello;
+import java.util.Scanner;
+
+public class Hello {
+
+
+  public static void main(String[] args) {
+  Scanner teclado = new Scanner(System.in);
+
+  int elop1;
+  int new_elo_p1;
+  int elop2;
+  int new_elo_p2;
+  double K_factor;
+  double result;
+  double expected_score;
+  double exponente;
+
+  System.out.println("digite o seu elo antes da partida");
+  elop1 = teclado.nextInt();
+  System.out.println("digite o elo do seu oponente antes da partida");
+  elop2 = teclado.nextInt();
+
+  exponente = ((double) (elop2 - elop1) /400);
+
+  expected_score = (1 / (1 + Math.pow(10, exponente)));
+  System.out.println("\nsua chance de ganhar a partida segundo o systema de elo eh:" + expected_score + "%");
+  System.out.println("ou 1 em " + (int)(1/expected_score) + "(aproxiamdamente)");
+  
+  System.out.println("\n digite o fator K (recomendado de 40 a 10, menor quanto maior for o elo dos jogadores)");
+  K_factor = teclado.nextDouble();
+  System.out.println("qual foi o resultado da partida 1 = vitoria 0,5 = empate 0 = derrota)");
+  result = teclado.nextDouble();
+
+  
+  new_elo_p1 = (int) (elop1 + K_factor * (result - expected_score));
+  new_elo_p2 = (elop2 + (elop1 - new_elo_p1));
+  System.out.println("\nseu novo elo: " + new_elo_p1);
+  System.out.println("novo elo de seu oponente: " + new_elo_p2);
+  System.out.println("mudanca de elo: " + (elop1 - new_elo_p1));
+    }
+        
+}
